@@ -1,0 +1,95 @@
+<div>&nbsp;</div>
+<!-- <div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6 well" *ngIf="productsSelected && !isExprired"> -->
+    <div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6 well">
+
+    <div class="title-text visible-xs" style="
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 3em;
+  text-align: center;
+  border:none !important;
+    "> 
+        R E S E R V
+    </div>
+    
+    <div class="title-text visible-sm visible-md visible-lg" style="
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 4em;
+  text-align: center;
+  border:none !important;
+    "> 
+        R E S E R V
+    </div>
+
+    <div>
+        <h1>Login</h1>
+    </div>
+    <form (ngSubmit)="onSubmit()" #mainForm="ngForm">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <fieldset class="form-form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" #email="ngModel" [(ngModel)]="model.email" name="email" class="form-control" placeholder="email" required />
+                </fieldset> 
+            </div>
+        </div>
+
+        <div class="row row-spacer">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div [hidden]="email.valid || email.pristine" class="alert alert-danger" *ngIf="model != null">
+                    email address is required
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-spacer">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <fieldset class="form-form-group">
+                    <label for="password">Password</label>
+                    <input type="password" #password="ngModel" [(ngModel)]="model.password" name="password" class="form-control" placeholder="Password" required />
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="row row-spacer">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div [hidden]="password.valid || password.pristine" class="alert alert-danger" *ngIf="model != null">
+                    password is required
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-spacer">
+            <div class="col-md-5">
+                <button type="submit" [disabled]="!mainForm.valid || mainForm.pristine " class="btn btn-primary">Login</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<!-- <div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6 well" style="text-align: center" *ngIf="productsSelected && !isExprired"> -->
+<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6 well" style="text-align: center">
+    
+    Need an account? <a routerLink="/register">Register</a>
+    <br/>
+</div>
+
+<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6 well" style="text-align: center" *ngIf="!productsSelected && !isExprired">
+    <div>
+        <h1>
+            <div>Products Not Selected</div>
+            <div style="padding-top:10px">Please Visit Merchant</div>
+        </h1>
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6 well" style="text-align: center" *ngIf="isExprired == true">
+    <div>
+        <h1>
+            <div>Link Has Expired</div>
+            <div style="padding-top:10px">Please Visit Merchant</div>
+        </h1>
+    </div>
+</div>

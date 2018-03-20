@@ -1,0 +1,15 @@
+.login_wrapper {
+    right: 0px;
+    margin: 0px auto;
+    margin-top: 5%;
+    max-width: 350px;
+    position: relative; 
+  }
+  
+  .title-text {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 4em;
+    text-align: center;
+    border: solid 1px black !important;
+    color: grey;
+  }

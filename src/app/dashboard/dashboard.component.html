@@ -1,0 +1,453 @@
+<div class="shopping-container" id="divDashboard" *ngIf="showDashboard == true && isFinal == false">
+  <div class="col-sm-8 col-md-8 col-lg-8 section-left">
+      
+      <div class="heading">
+          Create a Reserv
+      </div>
+
+      <div class="sub-heading" *ngIf="currentStep == 1">
+          > Set Name and Duration
+      </div>
+
+      <div class="sub-heading" *ngIf="currentStep == 2">
+          > Shipping Address
+      </div>
+
+      <div class="sub-heading" *ngIf="currentStep == 3">
+          > Select Account
+      </div>
+
+      <div class="sub-heading" *ngIf="currentStep == 4">
+          > Confirm your Reserv
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div id="divNameAndDuration" *ngIf="currentStep == 1" class="divStep">
+          
+          <div class="row spacer-top">
+              <div class="col-sm-4 col-md-4 col-lg-4 visible-sm visible-md visible-lg">
+                  <div class="form-label">Name your Reserv</div>
+              </div>
+              <div class="col-xs-12 visible-xs" style="padding-bottom:5px;">
+                  <div class="form-label" style="text-align: left">Name your Reserv</div>
+              </div>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                  <input type="text" [(ngModel)]="reserve.reserveName" name="reserveName" class="form-control" required >
+              </div>
+          </div>
+
+          <div class="visible-sm visible-md visible-lg">
+          <div class="row spacer-top">
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                  <div class="form-label">Duration</div>
+              </div>
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                  <div (click)="selectedDuration = 1; reserve.interval = 6; reserve.scheduleTypeConst = 'WEEKLY'; calculate();" class="duration-button" [ngClass]="{'selected': selectedDuration == 1}">
+                      <div class="larger">6</div>
+                      <div>WEEKS</div>
+                  </div>
+                  <div (click)="selectedDuration = 2; reserve.interval = 4; reserve.scheduleTypeConst = 'MONTHLY'; calculate();" class="duration-button" [ngClass]="{'selected': selectedDuration == 2}">
+                      <div class="larger">4</div>
+                      <div>MONTHS</div>
+                  </div>
+                  <div (click)="selectedDuration = 3; calculate();" class="duration-button" [ngClass]="{'selected': selectedDuration == 3}" style="padding-top:32px;">
+                      CUSTOM
+                  </div>
+              </div>
+          </div>
+          </div>
+
+          <div class="visible-xs">
+          <div class="row spacer-top">
+              <div class="col-xs-12">
+                  <div class="form-label" style="text-align: left">Duration</div>
+              </div>
+              <div class="col-xs-12">
+                  <div (click)="selectedDuration = 1; reserve.interval = 6; reserve.scheduleTypeConst = 'WEEKLY'; calculate();" class="duration-button sm" [ngClass]="{'selected': selectedDuration == 1}">
+                      <div class="larger">6</div>
+                      <div>WEEKS</div>
+                  </div>
+                  <div (click)="selectedDuration = 2; reserve.interval = 4; reserve.scheduleTypeConst = 'MONTHLY'; calculate();" class="duration-button sm" [ngClass]="{'selected': selectedDuration == 2}">
+                      <div class="larger">4</div>
+                      <div>MONTHS</div>
+                  </div>
+                  <div (click)="selectedDuration = 3; calculate();" class="duration-button sm right" [ngClass]="{'selected': selectedDuration == 3}" style="padding-top:32px;">
+                      CUSTOM
+                  </div>
+              </div>
+          </div>
+          </div>
+
+          <div class="visible-sm visible-md visible-lg">
+          <div class="row spacer-top">
+              <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                  <div class="form-label">Start Date</div>
+              </div>
+              <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                  <input type="date" *ngIf="reserve.requiresDeposit == false" [(ngModel)]="reserve.startDate" name="startDate" (change)="calculate();" class="form-control" style="width: 160px;">
+                  
+                  <div *ngIf="reserve.requiresDeposit == true" style="margin-top: 5px;">
+                      {{ reserve.startDate }}
+                  </div>
+              </div>
+              
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" *ngIf="selectedDuration == 3">
+                  <input type="number" [(ngModel)]="reserve.interval" (change)="calculate();" name="interval" class="form-control" style="margin-left: 10px; width: 80px;">
+              </div>
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" *ngIf="selectedDuration == 3">
+                  <select class="form-control" name="scheduleTypeConst" (change)="calculate();" [(ngModel)]="reserve.scheduleTypeConst" style="margin-left:-8px;">
+                      <option value="WEEKLY" selected>Weeks</option>
+                      <option value="MONTHLY">Months</option>
+                      <option value="DAILY">Days</option>
+                  </select>
+              </div>
+          </div>
+          </div>
+
+          <div class="visible-xs">
+          <div class="row spacer-top">
+              <div class="col-xs-4" *ngIf="selectedDuration == 3">
+                  <input type="number" [(ngModel)]="reserve.interval" (change)="calculate();" name="interval" class="form-control" style="margin-left: 0px; width: 80px;">
+              </div>
+              <div class="col-xs-6" *ngIf="selectedDuration == 3">
+                  <select class="form-control" name="scheduleTypeConst" (change)="calculate();" [(ngModel)]="reserve.scheduleTypeConst" style="margin-left:-8px;">
+                      <option value="WEEKLY" selected>Weeks</option>
+                      <option value="MONTHLY">Months</option>
+                      <option value="DAILY">Days</option>
+                  </select>
+              </div>
+
+              <div class="col-xs-6">
+                  <div class="form-label">Start Date</div>
+              </div>
+              <div class="col-xs-6">
+                  <input type="date" *ngIf="reserve.requiresDeposit == false" [(ngModel)]="reserve.startDate" name="startDate" (change)="calculate();" class="form-control" style="width: 160px;">
+                  
+                  <div *ngIf="reserve.requiresDeposit == true" style="margin-top: 5px;">
+                      {{ reserve.startDate }}
+                  </div>
+              </div>
+
+          </div>
+          </div>
+
+          <div class="visible-sm visible-md visible-lg">
+          <div class="row spacer-top">
+              <div class="col-sm-offset-4 col-md-offset-4 col-lg-offset-4 col-xs-8 colcol-sm-8 col-md-8 col-lg-8">
+
+                  <div *ngIf="reserve.requiresDeposit == true" style="font-size: .9em; font-weight: bolder; border: solid 2px orangered; padding: 10px; margin-top: 15px; border-radius:5px; margin-right: 40px;">
+                      <div style="font-size:1.4em;">5 DAYS TO CANCEL</div>
+                      You have a five calendar day grace period to cancel your Reserv plan.<br /> 
+                      After 5 days the down payment becomes <strong>non-refundable.</strong> <br />
+                      All other payments are refundable at any time.<br />
+                      No refunds after plan completion
+                      
+                      <!--Down payment withdrawal is initiated upon finalization of this layaway plan. You will have 5 
+                      calendar days to cancel your down payment for a full refund. Between 5 and 30 days 
+                      from initiation, you can cancel your plan for a pro-rated refund. 
+                      After 30 days from initiation, you will be unable to get a refund on your down payment. -->
+                  </div>
+              </div>
+          </div>
+          </div>
+
+
+          <div class="visible-xs">
+          <div class="row spacer-top">
+              <div class="col-xs-12">
+                  
+                  <div *ngIf="reserve.requiresDeposit == true" style="font-size: .9em; font-weight: bolder; border: solid 2px orangered; padding: 10px;margin-bottom: 10px; margin-top: 15px; border-radius:5px; margin-right: 00px;">
+                      <div style="font-size:1.4em;">5 DAYS TO CANCEL</div>
+                      You have a five calendar day grace period to cancel your Reserv plan.<br /> 
+                      After 5 days the down payment becomes <strong>non-refundable.</strong> <br />
+                      All other payments are refundable at any time.<br />
+                      
+                      <!--Down payment withdrawal is initiated upon finalization of this layaway plan. You will have 5 
+                      calendar days to cancel your down payment for a full refund. Between 5 and 30 days 
+                      from initiation, you can cancel your plan for a pro-rated refund. 
+                      After 30 days from initiation, you will be unable to get a refund on your down payment. -->
+                  </div>
+              </div>
+          </div>
+          </div>
+
+      </div>
+
+      <div id="divNameShippingAddress" *ngIf="currentStep == 2" class="divStep">
+
+          <div class="row spacer-top">
+              <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                  <div style="padding-top:5px;">
+                      Add a new address
+                  </div>
+                  <div class="row-spacer">
+                      <input type="text" #address1="ngModel" [(ngModel)]="address.address1" name="address1" class="form-control" placeholder="Address 1" required />
+                  </div>
+
+                  <div class="row-spacer">
+                      <input type="text" #address2="ngModel" [(ngModel)]="address.address2" name="address2" class="form-control" placeholder="Address 2" />
+                  </div>
+                  <div class="row-spacer">
+                      <input type="text" #city="ngModel" [(ngModel)]="address.city" name="city" class="form-control" placeholder="City" required />
+                  </div>
+                  <div class="row-spacer">
+                      <div class="row">
+                          <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7" style="float:left">
+                              <select #stateConst="ngModel" [(ngModel)]="address.stateConst" name="stateConst" class="form-control" required>
+                                  <option *ngFor="let state of states" value="{{ state.stateConst }}">{{ state.stateName }}</option>
+                              </select>
+                          </div>
+                          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="float:left">
+                              <input type="text" #zipCode="ngModel" [(ngModel)]="address.zipCode" name="zipCode" class="form-control" placeholder="ZIP" maxlength="5" required />
+                          </div>
+                      </div>
+                      <div class="row-spacer more">
+                          <button class="btn btn-success" (click)="addAddress()">Add Address</button>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="visible-xs">&nbsp;</div>
+
+              <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+                  <div style="padding-top:5px;">
+                      Or Select an existing address
+                  </div>
+
+                  <div *ngFor="let address of addresses" style="font-size: 1.2em;" class="row-spacer">
+                      <div style="float:left">
+                          <input type="radio" name="address" [(ngModel)]="reserve.addressId" value="{{ address.addressId }}" />
+                          &nbsp;&nbsp;&nbsp;
+                      </div>
+                      <div style="float:left">
+                          {{ address.address1 }} 
+                          <br>
+                          {{ address.city }}, {{ address.zipCode }} {{ address.stateConst }} 
+                      </div>
+                      <div class="clearfix"></div>
+                      <p>
+                  </div>
+
+              </div>
+          </div>
+
+      </div>
+
+      <div id="divNameSelectAccount" *ngIf="currentStep == 3" class="divStep">
+
+          <div class="row spacer-top">
+              <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                  <div style="padding-top:5px;">
+                      Add a new account
+                  </div>
+
+                  <div class="row-spacer more">
+                      <button class="btn btn-success" (click)="addAccount()" [disabled]="accounts.length > 0" >Add Bank Account</button>
+                  </div>
+
+              </div>
+
+              <div class="visible-xs">&nbsp;</div>
+
+              <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+                  <div style="padding-top:5px;">
+                      Select an account
+                  </div>
+
+                  <div *ngFor="let account of accounts" style="font-size: 1.2em;">
+                      <div style="float:left">
+                          <input type="radio" name="account" [(ngModel)]="reserve.accountUid" value="{{ account.accountUid }}" />
+                          &nbsp;&nbsp;&nbsp;
+                      </div>
+                      <div style="float:left">
+                          {{ account.accountName }}
+                          <br>
+                          {{ account.accountTypeName }}
+                          <br>
+                      </div>
+                      <div class="clearfix"></div>
+                      <p>
+                  </div>
+
+              </div>
+          </div>
+
+      </div>
+
+      <div id="divConfirmYourReserv" *ngIf="currentStep == 4" class="divStep">
+
+          <div class="row spacer-top">
+              <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                  <div style="padding-top:5px;">
+                    <strong>Products in Reserv</strong>
+                  </div>
+
+                  <div *ngFor="let product of reserve.products" style="font-size: 1.2em;">
+                      <div style="float:left; padding-right:15px;" *ngIf="!(product.imageUrl == null)">
+                          <!--<img [src]="product.imageUrl" style="height:75px" *ngIf="!(product.imageUrl == null)">-->
+                      </div>
+                      <div style="float:left; padding-top: 10px;">
+                          {{ product.productName }}
+                          <br>
+                          <span class="currency">
+                              {{ product.price | currency:'USD':true:'1.2-2' }}
+                          </span>
+                          <br>
+                      </div>
+                      <div class="clearfix"></div>
+                      <p>
+                  </div>
+
+              </div>
+
+              <div class="visible-xs">&nbsp;</div>
+
+              <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+
+                  <div style="padding-top:5px;">
+                      <strong>Payment Schedule</strong>
+                  </div>
+
+                  <div *ngFor="let payment of reserve.payments" style="font-size: 1em; padding-top:5px;">
+                      {{ payment.paymentAmount | currency:'USD':true:'1.2-2' }} 
+                      <span *ngIf="reserve.requiresDeposit == true && payment.paymentNumber == 0"> down payment </span>
+                      on 
+                      {{ payment.paymentDateFormatted }}
+                  </div>
+
+              </div>
+          </div>
+
+      </div>
+
+      <div class="row spacer-top">
+          <div class="col-sm-offset-4 col-md-offset-4 col-lg-offset-4 col-xs-12 colcol-sm-8 col-md-8 col-lg-8">
+              <div style="float:left">
+                  <button (click)="movePrev()" [disabled]="currentStep == 1" class="btn btn-info"><i class="glyphicon glyphicon-arrow-left"></i> Back</button>
+                  <button (click)="moveNext()" *ngIf="currentStep != 4" [disabled]="currentStep == 4 || (currentStep == 3 && accounts.length == 0)" class="btn btn-info">Next <i class="glyphicon glyphicon-arrow-right"></i></button>
+              </div>
+
+              <div style="float:left; padding-left: 5px;">
+                  <button (click)="complete()" *ngIf="currentStep == 4" class="btn btn-success"> Complete Reserv</button>
+              </div>
+          </div>
+      </div>
+
+  </div>
+
+  <div class="col-sm-4 col-md-4 col-lg-4 section-right">
+      <div style="padding-top: 10px;"></div>
+
+      <div class="visible-sm visible-md visible-lg">
+      <div class="menu-item">
+          <div class="menu-button-number" [ngClass]="{'selected': currentStep == 1}">1</div>
+          <div class="menu" [ngClass]="{'selected': currentStep == 1}">Set Name and Duration</div>
+      </div>
+
+      <div class="clearfix"></div><br>
+
+      <div class="menu-item">
+          <div class="menu-button-number" [ngClass]="{'selected': currentStep == 2}">2</div>
+          <div class="menu" [ngClass]="{'selected': currentStep == 2}">Shipping Address</div>
+      </div>
+      
+      <div class="clearfix"></div><br>
+
+      <div class="menu-item">
+          <div class="menu-button-number" [ngClass]="{'selected': currentStep == 3}">3</div> 
+          <div class="menu" [ngClass]="{'selected': currentStep == 3}">Select Account</div>
+      </div>
+      
+      <div class="clearfix"></div><br>
+
+      <div class="menu-item">
+          <div class="menu-button-number" [ngClass]="{'selected': currentStep == 4}">4</div> 
+          <div class="menu" [ngClass]="{'selected': currentStep == 4}">Confirm your Reserv</div>
+      </div>
+
+      <div class="clearfix"></div>
+      <br>
+
+      </div>
+
+
+      <div class="amount">
+
+          <div style="padding-top: 40px;" *ngIf="reserve.requiresDeposit == false">&nbsp;</div>
+          <div style="padding-top: 0px;" *ngIf="reserve.requiresDeposit == true">&nbsp;</div>
+
+          <div style="float:left">Sub-Total:</div>
+          <div style="float:right">{{ reserve.totalProduct | currency:'USD':true:'1.2-2' }}</div>
+          <div class="clearfix"></div>
+          
+          <div style="float:left">Total Tax:</div>
+          <div style="float:right">{{ reserve.totalTax | currency:'USD':true:'1.2-2' }}</div>
+          <div class="clearfix"></div>
+          
+
+          <div style="float:left">Total Shipping:</div>
+          <div style="float:right">{{ reserve.totalShipping | currency:'USD':true:'1.2-2' }}</div>
+          <div class="clearfix"></div>
+
+          <div style="float:left">Total:</div>
+          <div style="float:right">{{ reserve.adjustedTotal | currency:'USD':true:'1.2-2' }}</div>
+          <div class="clearfix"></div>
+
+          <div style="float:left"></div>
+          <div style="float:right"></div>
+          <div class="clearfix"></div>
+
+          <br>
+
+          <div *ngIf="reserve.requiresDeposit == true">
+              Down Payment: {{ reserve.depositAmount | currency:'USD':true:'1.2-2' }}<br>
+              {{ reserve.totalPayments - 1 }} payments of {{ reserve.paymentAmount | currency:'USD':true:'1.2-2' }}<br>
+              Goal Date: {{ getGoalDateFormatted() }}<br><br>
+            </div>
+
+          <div *ngIf="reserve.requiresDeposit == false">
+              Payment: {{ reserve.totalPayments }} payments of {{ reserve.paymentAmount | currency:'USD':true:'1.2-2' }}<br>
+              Goal Date: {{ reserve.getGoalDateFormatted() }}<br><br>
+          </div>
+          &nbsp;
+      </div>
+
+  </div>
+
+</div>
+
+<div class="final-container" style="text-align: center;" *ngIf="isFinal == true">
+  
+  <p>&nbsp;<p>
+
+  <div class="title-text" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: 4em; text-align: center; color: grey"> 
+      R E S E R V
+  </div>
+
+  <div class="heading2" style="text-align: center;">
+      Awesome job!  Your Reserv is set up.
+  </div>
+  
+  <p>&nbsp;<p>
+
+  <div class="clearfix"></div>
+
+  <div>
+      <img src="/images/logo-orange-circle-212-shadow@2x.png.png" height="250px" />
+  </div>
+
+  <p>&nbsp;<p>
+
+  <div style="text-align: center">
+      
+      <a href="http://www.myreserv.com">
+          <button class="btn btn-success" style="" >Visit your dashboard on MyReserv.com</button>
+      </a>
+  </div>
+</div>
+
+<div id="iavContainer"></div>
+<!-- <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8" id="divIav" *ngIf="showDashboard == false">
+</div>
+ -->

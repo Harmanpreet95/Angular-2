@@ -1,0 +1,153 @@
+body {
+  background-color: #fafafa;
+  font-family: "Helvetica" !important; }
+
+.navbar-default {
+  background-color: white;
+  color: black; }
+
+.navbar-brand {
+  font-family: "Helvetica" !important;
+  font-size: 26px;
+  color: black !important; }
+
+ff-menu {
+  background-color: #fafafa; }
+
+.ff-container {
+  margin-top: 55px; }
+
+.ff-header {
+  font-family: "Helvetica" !important;
+  font-size: 24px;
+  color: black;
+  float: left; }
+
+.ff-header-sm {
+  font-family: "Helvetica" !important;
+  font-size: 20px;
+  color: gainsboro;
+  padding-top: 5px; }
+
+.ff-profile-image-md {
+  height: 100px;
+  border-radius: 50px;
+  margin-bottom: 15px; }
+
+.menu-container hr {
+  width: 75%; }
+
+.menu-container ul {
+  list-style-type: none; }
+
+.menu-container ul li {
+  padding-bottom: 5px; }
+
+.menu-container ul li a {
+  color: slategrey;
+  text-decoration: none; }
+
+.menu-container ul li i {
+  color: slategrey; }
+
+.menu-container ul li.active i {
+  color: red; }
+
+.menu-container ul li.active a {
+  color: red; }
+
+.menu-container ul li i {
+  width: 30px; }
+
+.menu-top {
+  text-align: center;
+  padding-top: 20px; }
+
+.menu-name {
+  font-size: 18px; }
+
+.menu-edit {
+  font-size: 12px;
+  color: red; }
+
+.well {
+  background-color: white !important; }
+
+.row-spacer {
+  padding-top: 5px; }
+
+.ng-valid[required] {
+  border-left: 5px solid #42A948;
+  /* green */ }
+
+.ng-invalid {
+  border-left: 5px solid #a94442;
+  /* red */ }
+
+.ff-profile-image-lg {
+  width: 250px;
+  border-radius: 5px; }
+
+.row-spacer-bottom {
+  padding-bottom: 5px; }
+
+.product-thumbnail {
+  height: 65px; }
+
+  * { box-sizing: border-box; }
+html { height: 100%; }
+body { min-height: 100%; }
+
+/*body {
+    border-top: solid 4px orange;
+    border-right: solid 4px orange;
+    border-left: solid 4px orange;
+}*/
+
+body {
+  background: orange;
+}
+
+.page-wrap {
+  position: fixed;
+  z-index: 1000;
+  top: 4px;
+  right: 4px;
+  left: 4px;
+  bottom: 4px;
+  background: white;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 5px;
+}
+
+#footer {
+    background-color: orangered;
+    position: fixed;
+    bottom: 4px;
+    right: 4px;
+    left: 4px;
+    padding-right:20px;
+    color:white;
+    height: 40px;
+    font-family: "Verdana";
+}
+
+.footer-header {
+    padding-top: 6px;
+    font-size: 20px;
+    padding-left: 10px;
+    float: left;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+

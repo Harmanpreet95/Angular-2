@@ -1,0 +1,189 @@
+<div id="divRegister">
+  <div class="col-xs-12 col-xs-off col-sm-offset-1 col-sm-10 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8 well" *ngIf="step == 1">
+
+      <div style="text-align:center">
+          <h3>Let's create your account</h3>
+      </div>
+
+      <form (ngSubmit)="onSubmit()" #mainForm="ngForm" >
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="row-spacer">
+                  <fieldset class="form-form-group">
+                      <label for="emailAddress">Email Address</label>
+                      <input type="emailAddress" #emailAddress="ngModel" [(ngModel)]="customer.emailAddress" name="emailAddress" class="form-control" placeholder="email" required />
+                  </fieldset> 
+              </div>
+              <div class="alert alert-danger" *ngIf="customer != null" [hidden]="emailAddress.valid || emailAddress.pristine" >
+                  email address is required
+              </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 row-spacer">
+              <fieldset class="form-form-group">
+                  <label for="password">Password</label>
+                  <input type="password" #password="ngModel" [(ngModel)]="customer.password" name="password" class="form-control" placeholder="Password" required />
+              </fieldset>
+              <div [hidden]="password.valid || password.pristine" class="alert alert-danger" *ngIf="customer != null">
+                  password is required
+              </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 row-spacer">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" #firstName="ngModel" [(ngModel)]="customer.firstName" name="firstName" class="form-control" placeholder="first name" maxlength="100" required />
+
+              <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger" *ngIf="customer != null">
+                  first name is required
+              </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 row-spacer">
+              <label for="lastName">Last Name</label>
+              <input type="text" #lastName="ngModel" [(ngModel)]="customer.lastName" name="lastName" class="form-control" placeholder="last name" maxlength="100" required />
+
+              <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger" *ngIf="customer != null">
+                  last name is required
+              </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 row-spacer">
+              <label for="phone">Phone</label>
+              <input type="text" #phone="ngModel" [(ngModel)]="customer.phone" name="phone" class="form-control" placeholder="phone" maxlength="100" required />
+
+              <div [hidden]="phone.valid || phone.pristine" class="alert alert-danger" *ngIf="customer != null">
+                  phone is required
+              </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 row-spacer">
+              
+              <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 row-spacer">
+                      <label for="dob">DOB</label>
+                      <input type="date" #dob="ngModel" (change)="dobChanged()" [(ngModel)]="customer.dob" name="dob" class="form-control" placeholder="dob" required />
+
+                      <div [hidden]="dob.valid || dob.pristine" class="alert alert-danger" *ngIf="customer != null">
+                          dob is required
+                      </div>
+                      <!-- <div [hidden]="dateValid==true || dob.pristine" class="alert alert-danger" *ngIf="customer != null">
+                        must be over 18
+                    </div> -->
+                </div>
+                  <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 row-spacer">
+                      <label for="last4">Last 4 SSN</label>
+                      <input type="text" #last4="ngModel" [(ngModel)]="customer.last4" name="last4" class="form-control" placeholder="last 4" maxlength="4" required />
+
+                      <div [hidden]="last4.valid || last4.pristine" class="alert alert-danger" *ngIf="customer != null">
+                          last 4 required
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 row-spacer">
+              <label for="address1">Address 1</label>
+              <input type="text" #address1="ngModel" [(ngModel)]="customer.address1" name="address1" class="form-control" placeholder="address 1" required />
+
+              <div [hidden]="address1.valid || address1.pristine" class="alert alert-danger" *ngIf="customer != null">
+                  Address 1 required
+              </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 row-spacer">
+              <label for="address2">Address 2</label>
+              <input type="text" #address2="ngModel" [(ngModel)]="customer.address2" name="address2" class="form-control" placeholder="address 2" />
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 row-spacer">
+              <label for="city">City</label>
+              <input type="text" #city="ngModel" [(ngModel)]="customer.city" name="city" class="form-control" placeholder="city" required />
+
+              <div [hidden]="city.valid || city.pristine" class="alert alert-danger" *ngIf="customer != null">
+                  City required
+              </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 row-spacer">
+              
+              <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 row-spacer">
+                      <label for="stateConst">State</label>
+                      <select #stateConst="ngModel" [(ngModel)]="customer.stateConst" name="stateConst" class="form-control" required>
+                          <option *ngFor="let state of states" value="{{ state.stateConst }}">{{ state.stateName }}</option>
+
+                          <div [hidden]="stateConst.valid || stateConst.pristine" class="alert alert-danger" *ngIf="customer != null">
+                              State is required
+                          </div>
+                      </select>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 row-spacer">
+                      <label for="zipCode">Zip Code</label>
+                      <input type="text" #zipCode="ngModel" [(ngModel)]="customer.zipCode" name="zipCode" class="form-control" placeholder="zip" required />
+
+                      <div [hidden]="zipCode.valid || zipCode.pristine" class="alert alert-danger" *ngIf="customer != null">
+                          Zip Code required
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 row-spacer">
+              Funds are held with <a href="http://www.dwolla.com" target="_blank">Dwolla</a>, our payment processor, 
+              which has brought fast, secure payments to entities like the CME Group, and the 
+              <a href="https://www.treasury.gov" target="_blank">U.S. Treasury</a>. For more information,
+              please visit <a href="http://www.myreserv.com" target="_blank">www.myreserv.com</a>
+              <br><br>
+              By signing up you agree to our <a href="http://www.myreserv.com/terms.html" target="_blank">Terms of Service</a> and <a href="http://www.myreserv.com/privacy.html" target="_blank">Privacy Policy</a>
+              as well as our partner Dwolla's <a href="https://www.dwolla.com/legal/tos/?whitelabel" target="_blank">Terms of Service</a> and <a href="https://www.dwolla.com/legal/privacy/?whitelabel" target="_blank">Privacy Policy</a>
+              <br/>
+              <span style="padding-top: 10px; padding-left: 20px;"><input style="padding-top: 10px;" type="checkbox" #agree="ngModel" [(ngModel)]="isAgree" name="agree" /> I Agree</span>
+          </div>
+
+          <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 row-spacer visible-sm visible-md visible-lg">
+              <br>
+          </div>
+
+          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 row-spacer">
+              <br>
+              <button type="submit" [disabled]="(isSubmitted == true || !mainForm.valid || mainForm.pristine || isAgree == false)" class="btn btn-primary pull-right">Submit Registration</button>
+
+              <div class="pull-right" *ngIf="isSubmitted == false && mainForm.valid && isAgree == false">
+                <div class="clearfix"></div>
+                <br>
+                Please agree to the terms and conditions
+              </div>
+          </div>
+
+          <div class="row-spacer" *ngIf="model != null">
+              {{ message }}
+          </div>
+      </form>
+
+      <div class="clearfix"></div>
+
+      <br>
+
+      <!--<div style="padding-top: 0px;">&nbsp;</div>
+
+      <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6 well" style="text-align: center;">
+          Already have an account? <a routerLink="/login">Login</a>
+          <br/>
+      </div>
+  -->
+  </div>
+
+  <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+      <div id="iavContainer"></div>
+  </div>
+
+</div>
+
+<div id="divNext" style="text-align: center; display:none">
+  <h1>Thank you for registering your account</h1>
+  <h3>Click next to continue creating your Reserv</h3>
+  <br>
+  <button class="btn btn-success" style="width:150px;" (click)="loadDashboard()">Next</button>
+</div>

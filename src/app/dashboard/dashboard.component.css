@@ -1,0 +1,247 @@
+.shopping-container {
+    width: 100%;
+    height: 500px;
+    /*border: solid 4px orange; */
+    font-family: "Verdana";
+    color: lightslategrey;
+}
+
+.section-left {
+    background-color: white;
+
+}
+
+.section-right {
+    background-color: #efefef;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.heading {
+    font-size: 24px;
+    color: black;
+    float: left;
+}
+
+.heading2 {
+    font-size: 24px;
+    color: black;
+}
+
+.currency {
+    font-weight: normal;
+    font-size: .8em;
+}
+
+.sub-heading {
+    padding-top: 5px;
+    padding-left: 10px;
+    font-size: 18px;
+    color: black;
+    float: left;
+    color: lightslategray;
+}
+
+.amount {
+    color:black;
+    font-size: 1.2em;
+}
+
+.form-label {
+    text-align: right;
+    padding-top: 5px;
+}
+
+.form-label left {
+    text-align: left !important;
+}
+
+.duration-button {
+    width: 110px;
+    height: 80px;
+    border: solid 2px gainsboro;
+    color: lightslategrey;
+    float:left;
+    font-family: "Arial";
+    font-size: 14px;
+    text-align: center;
+    padding-top: 12px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.duration-button.sm {
+    width: 30%;
+    height: 80px;
+    margin-right: 10px;
+}
+
+.duration-button.sm.right {
+    margin-right: 0px;
+}
+
+.duration-button:hover {
+    cursor: -webkit-grab;
+    border-color: orangered;
+    color: orangered;
+}
+
+.duration-button.selected {
+    border-color: orangered;
+    color: orangered;
+}
+
+.larger {
+    font-size: 24px;
+}
+
+.menu-button-number {
+    float: left;
+    width: 30px;
+    height: 30px;
+    border: solid 1px lightslategray;
+    border-radius: 15px;
+    margin-right: 10px;
+    text-align: center;
+    font-size: 18px;
+    cursor: -webkit-grab;
+}
+
+.menu-button-number.selected {
+    color: orangered;
+    border-color: orangered;
+}
+
+.menu {
+    font-size: 16px;
+    padding-top: 3px;
+    cursor: -webkit-grab;
+}
+
+.menu-item:hover {
+    border-color: orangered;
+    color: orangered;
+}
+
+.menu.selected {
+    color: orangered;
+    border-color: orangered;
+}
+
+.spacer-top {
+    padding-top: 15px !important;
+}
+
+.spacer-top.more {
+    padding-top: 25px !important;
+}
+
+.divStep {
+    height: 350px;
+    max-height: 350px;
+}
+
+.footer-exit {
+    padding-top: 8px;
+    font-size: 16px;
+    padding-right: 10px;
+    float:right;
+}
+
+.well {
+    background-color: #f5f5f5;
+}
+
+button {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 20px;
+    outline-style: none !important;
+}
+
+.locklLabel {
+    padding-top: 2px;
+    font-size: 1.2em;
+}
+
+.lockInText {
+    padding-top: 10px;
+    font-size: .9em;
+}
+
+.white {
+    color:white;
+}
+
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  left:0; top: 2px;
+  marging-right: 10px;  
+  width: 27px; height: 27px;
+  border: 1px solid #aaa;
+  background: #f8f8f8;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+}
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: '✔';
+  position: absolute;
+  top: 3px; left: 4px;
+  font-size: 18px;
+  line-height: 0.8;
+  color: #09ad7e;
+  transition: all .2s;
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(2);
+  padding-left: 3px;
+}
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+  box-shadow: none;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+[type="checkbox"]:disabled:checked + label:after {
+  color: #999;
+}
+[type="checkbox"]:disabled + label {
+  color: #aaa;
+}
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+  border: 1px dotted blue;
+}
+
+/* hover style just for information */
+label:hover:before {
+  border: 1px solid #4778d9!important;
+}
